@@ -12,4 +12,4 @@
 若要使用，请仔细阅读**config.php文件中第97至100行的内容**
 
 ## License
-   [![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png)](http://www.wtfpl.net/)
+   [![WTFPL](https://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl.svg)](http://www.wtfpl.net/)
