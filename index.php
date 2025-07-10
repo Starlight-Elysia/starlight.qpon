@@ -1,105 +1,15 @@
 <?php
-// 定义颜色主题
-$themes = [
-    'Blue' => [
-        'primary' => '#e3f2fd',
-        'accent' => '#90caf9',
-        'gold' => '#ffe082',
-        'text' => '#2d4059',
-        'highlight' => 'pink-text',
-        'highlight_color' => '#3A7BFF',
-        'particles' => ['✦', '❋'],
-        'poem' => [
-            ' <span class="pink-text">「爱是难驯鸟，哀乞亦无用。」</span>',
-            ' <span class="pink-text">「女人皆善变，仿若水中萍。」</span>',
-            ' <span class="pink-text">「秘密藏心间，无人知我名。」</span>',
-            ' <span class="pink-text">「若非处幽冥，怎知生可贵」！</span>',
-            ' <span class="pink-text">「我已有觉察，他名即是…」！</span>',
-            ' <span class="pink-text">「诸君听我颂，共举爱之杯」！</span>'
-        ],
-        'decoration' => '✿'
-    ],
-    'Pink' => [
-        'primary' => '#FFD6E7',
-        'accent' => '#FF85B3',
-        'gold' => '#FFB6C1',
-        'text' => '#8A2D5E',
-        'highlight' => 'pink-text',
-        'highlight_color' => '#FF6B9E',
-        'particles' => ['✦', '❋'],
-        'poem' => [
-            '他们曾如此骄傲地活过，<span class="pink-text">贯彻始终——</span>',
-            '以生命奏响了文明的颂歌。',
-            '这是被称作<span class="pink-text">「英桀」</span>的人们的故事，',
-            '是十三位逐火者<span class="pink-text">未竟的旅途</span>。',
-            '但来访者，你的道路仍将延续，不是吗？',
-            '那么，就听凭心意前进吧，',
-            '沿着脚下的足迹',
-            '去见证那段——<span class="pink-text">逐火的征程，</span>',
-            '最后，跨越逝者们的<span class="pink-text">终幕</span>，',
-            '去创造，',
-            '<span class="pink-text">「我们」</span>所未能迎接的未来吧！',
-            '此后，<span class="pink-text">将有百花盛放——</span>',
-            '因为，<span class="pink-text">我们从未离去……</span>'
-        ],
-        'decoration' => '✿'
-    ],
-    'Red' => [
-        'primary' => '#FFEBEE',
-        'accent' => '#EF5350',
-        'gold' => '#FF8A80',
-        'text' => '#C62828',
-        'highlight' => 'pink-text',
-        'highlight_color' => '#EF5350',
-        'particles' => ['❀', '❁', '✿', '❣', '❤'],
-        'poem' => [
-            '<span class="pink-text">赤团</span>开时斜飞去，',
-            '最不安神<span class="pink-text">晴又复雨，</span>',
-            '逗留<span class="pink-text">采</span>血色；',
-            '伴君<span class="pink-text">眠</span>花房；',
-            '无可奈何<span class="pink-text">燃花作香，</span>',
-            '<span class="pink-text">幽蝶</span>能留一缕芳。'
-        ],
-        'decoration' => '✿'
-    ],
-    'Green' => [
-        'primary' => '#E8F5E9',
-        'accent' => '#81C784',
-        'gold' => '#AED581',
-        'text' => '#2E7D32',
-        'highlight' => 'pink-text',
-        'highlight_color' => '#66BB6A',
-        'particles' => ['❀', '🍀', '🌱', '🌿'],
-        'poem' => [
-            '我们都栖息在<span class="pink-text">智慧之树</span>下，尝试<span class="pink-text">阅读</span>世界',
-            '<span class="pink-text">从土中读，从雨中读</span>……',
-            '尔后化身<span class="pink-text">白鸟</span>，攀上<span class="pink-text">枝头</span>——',
-            '终于衔住了至关重要的那一片<span class="pink-text">树叶</span>',
-            '<span class="pink-text">三千世界之中，又有小小世界</span>',
-            '所有<span class="pink-text">命运</span>，皆在此间<span class="pink-text">沸腾</span>。',
-            '我乃<span class="pink-text">命题</span>之人，',
-            '亦是<span class="pink-text">求解</span>之人——',
-            '以世人之梦<span class="pink-text">挽救世界</span>，',
-            '曾是属于我的<span class="pink-text">答案</span>；',
-            '而今……',
-            '你们也寻到了属于自己的<span class="pink-text">答案</span>。',
-            '我会将所有的<span class="pink-text">梦</span>归还世人。',
-            '须弥的子民啊，<span class="pink-text">再见</span>了……',
-            '愿你们今晚得享<span class="pink-text">美梦</span>。'
-        ],
-        'decoration' => '🍀'
-    ]
-];
+require_once 'config.php'; // 引入配置文件
 
 // 音乐数据 - 每首音乐对应一个封面
 // 音乐目录和封面目录配置
-$musicDir = 'audio/';      // 音乐文件存放目录
-$coverDir = 'images/';     // 封面图片存放目录
+$musicDir = $siteConfig['music']['directory'];      // 音乐文件存放目录
+$coverDir = $siteConfig['music']['cover_directory'];     // 封面图片存放目录
 
 // 支持的音频格式
-$audioFormats = ['mp3', 'ogg', 'wav', 'm4a'];
+$audioFormats = $siteConfig['music']['formats'];
 // 支持的封面图片格式（按优先级排序）
-$coverFormats = ['jpg', 'png', 'webp', 'jpeg', 'gif'];
+$coverFormats = $siteConfig['music']['cover_formats'];
 
 // 自动扫描音乐文件并构建播放列表
 $musicLibrary = [];
@@ -146,10 +56,6 @@ if (empty($musicLibrary)) {
 // 当前播放索引
 $currentSongIndex = 0;
 
-
-// 默认当前播放的音乐索引
-$currentSongIndex = 0;
-
 function hex2rgba($color, $opacity = 1) {
     $hex = str_replace('#', '', $color);
     if(strlen($hex) == 3) {
@@ -164,7 +70,7 @@ function hex2rgba($color, $opacity = 1) {
     return "rgba($r, $g, $b, $opacity)";
 }
 
-// 获取当前主题，默认为Elysia/Pink
+// 获取当前主题，默认为Pink
 $currentTheme = isset($_GET['theme']) && isset($themes[$_GET['theme']]) ? $_GET['theme'] : 'Pink';
 $theme = $themes[$currentTheme];
 ?>
@@ -173,8 +79,8 @@ $theme = $themes[$currentTheme];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/icon.png" type="image/x-icon">
-    <title>BG9JUE - 业余无线电台</title>
+    <link rel="icon" href="<?php echo $siteConfig['user']['favicon']; ?>" type="image/x-icon">
+    <title><?php echo $siteConfig['title']; ?></title>
 <style>
     :root {
         --primary-blue: <?php echo $theme['primary']; ?>;
@@ -493,11 +399,29 @@ $theme = $themes[$currentTheme];
         100% { transform: translateY(100vh) rotate(360deg); }
     }
 
-    .particle-overlay::before { left: 10%; animation-delay: 0s; }
-    .particle-overlay::after { left: 30%; content: "<?php echo isset($theme['particles'][1]) ? $theme['particles'][1] : '❋'; ?>"; animation-delay: 2s; }
-    .particle-overlay div:nth-child(1) { left: 50%; content: "<?php echo isset($theme['particles'][2]) ? $theme['particles'][2] : '✦'; ?>"; animation-delay: 4s; }
-    .particle-overlay div:nth-child(2) { left: 70%; content: "<?php echo isset($theme['particles'][3]) ? $theme['particles'][3] : '✦'; ?>"; animation-delay: 6s; }
-    .particle-overlay div:nth-child(3) { left: 90%; content: "<?php echo isset($theme['particles'][4]) ? $theme['particles'][4] : '✦'; ?>"; animation-delay: 1s; }
+    .particle-overlay::before {
+         left: 10%; animation-delay: 0s;
+    }
+    .particle-overlay::after { 
+        left: 30%; 
+        content: "<?php echo isset($theme['particles'][1]) ? $theme['particles'][1] : '❋'; ?>"; 
+        animation-delay: 2s; 
+    }
+    .particle-overlay div:nth-child(1) { 
+        left: 50%; 
+        content: "<?php echo isset($theme['particles'][2]) ? $theme['particles'][2] : '✦'; ?>"; 
+        animation-delay: 4s; 
+    }
+    .particle-overlay div:nth-child(2) { 
+        left: 70%; 
+        content: "<?php echo isset($theme['particles'][3]) ? $theme['particles'][3] : '✦'; ?>"; 
+        animation-delay: 6s; 
+    }
+    .particle-overlay div:nth-child(3) { 
+        left: 90%; 
+        content: "<?php echo isset($theme['particles'][4]) ? $theme['particles'][4] : '✦'; ?>"; 
+        animation-delay: 1s; 
+    }
 
     #clock-container {
         display: flex;
@@ -576,52 +500,51 @@ $theme = $themes[$currentTheme];
         color: var(--text-color);
         font-size: 12px;
         border-radius: 10px;
-}
-.simple-theme-switcher {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-.simple-theme-switcher button {
-  background: rgba(255,255,255,0.9);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-.theme-options {
-  display: none;
-  position: absolute;
-  right: 0;
-  background: white;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-.theme-options div {
-  padding: 8px 12px;
-  margin: 2px 0;
-  border-radius: 4px;
-  cursor: pointer;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-}
-.copyright-notice {
-  display: block;
-  font-style: italic;
-  font-size: 12px;
-  color: #808080;
-  text-align: center;
-  margin: 10px auto;
-  max-width: 80%;
-  line-height: 1.3;
-  margin-top: 5px;
-}
-
+    }
+    .simple-theme-switcher {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+    .simple-theme-switcher button {
+        background: rgba(255,255,255,0.9);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .theme-options {
+        display: none;
+        position: absolute;
+        right: 0;
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .theme-options div {
+        padding: 8px 12px;
+        margin: 2px 0;
+        border-radius: 4px;
+        cursor: pointer;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .copyright-notice {
+        display: block;
+        font-style: italic;
+        font-size: 12px;
+        color: #808080;
+        text-align: center;
+        margin: 10px auto;
+        max-width: 80%;
+        line-height: 1.3;
+        margin-top: 5px;
+    }
 </style>
 </head>
 <body>
@@ -649,84 +572,85 @@ $theme = $themes[$currentTheme];
                 <div class="music-title" id="musicTitle"><?php echo htmlspecialchars($musicLibrary[$currentSongIndex]['title']); ?></div>
             </div>
         </div>
-
-
-            <div class="progress-container" id="progressContainer">
-                <div class="progress-bar" id="progressBar"></div>
-            </div>
-            <div class="time-display">
-                <span id="currentTime">0:00</span>
-                <span id="duration">0:00</span>
-            </div>
-            <div class="music-controls">
-                <button class="control-btn" id="prevBtn">⏮</button>
-                <button class="control-btn" id="playPauseBtn">▶</button>
-                <button class="control-btn" id="nextBtn">⏭</button>
-            </div>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
         </div>
-    </div>
+        <div class="time-display">
+            <span id="currentTime">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+        <div class="music-controls">
+            <button class="control-btn" id="prevBtn">⏮</button>
+            <button class="control-btn" id="playPauseBtn">▶</button>
+            <button class="control-btn" id="nextBtn">⏭</button>
+        </div>
     </div>
 </div>
 
-    <div class="water-wave"></div>
-    <div class="water-wave" style="animation-delay:-4s; opacity:0.3;"></div>
+<div class="water-wave"></div>
+<div class="water-wave" style="animation-delay:-4s; opacity:0.3;"></div>
 
 <div class="simple-theme-switcher">
-  <button onclick="toggleThemeMenu()">✿</button>
-  <div class="theme-options">
-    <?php foreach ($themes as $name => $data): ?>
-      <div onclick="changeTheme('<?php echo $name; ?>')" 
-           style="background: <?php echo $data['accent']; ?>">
-        <?php echo $name; ?>
-      </div>
-    <?php endforeach; ?>
-  </div>
+    <button onclick="toggleThemeMenu()">✿</button>
+    <div class="theme-options">
+        <?php foreach ($themes as $name => $data): ?>
+            <div onclick="changeTheme('<?php echo $name; ?>')" 
+                style="background: <?php echo $data['accent']; ?>">
+                <?php echo $name; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>
-    <img src="./avatar.webp" alt="BG9JUE" class="avatar">
 
-    <div class="info-container" style="margin-top: 20px;">
-        <div class="fixed-text-section">
-            <h3 style="color: var(--accent-blue);"><?php echo $theme['decoration']; ?> StarlightJUE /「星珏流辉」 <?php echo $theme['decoration']; ?></h3>
-            <p>你可以用这个名字称呼我，当然称呼呼号也可以。</p>
-            <h3 style="color: var(--accent-blue);"><?php echo $theme['decoration']; ?> 关于我的电台 <?php echo $theme['decoration']; ?></h3>
-            <p>这里是BG9JUE的个人电台，位于华中地区。未成年A证，只有台UV-K6，主要因为当地没有中继，目前只能收SSTV，欢迎同好交换QSL卡片。</p>
-            <h3 style="color: var(--accent-blue);"><?php echo $theme['decoration']; ?> 关于网站域名 <?php echo $theme['decoration']; ?></h3>
-            <p>此网站主域名starlight.qpon为我个人域名，但借给了朋友用作他们<a href="https://jnpixel.starlight.qpon" style="color: var(--text-color);"> Minecraft 服务器</a>的宣传。</p>
-        </div>
+<img src="<?php echo $siteConfig['user']['avatar']; ?>" alt="<?php echo $siteConfig['user']['display_name']; ?>" class="avatar">
+
+<div class="info-container" style="margin-top: 20px;">
+    <div class="fixed-text-section">
+        <h3 style="color: var(--accent-blue);"><?php echo $theme['decoration']; ?> <?php echo $siteConfig['user']['display_name']; ?> <?php echo $theme['decoration']; ?></h3>
+        <p><?php echo $siteConfig['user']['introduction']['content']; ?></p>
+        <h3 style="color: var(--accent-blue);"><?php echo $theme['decoration']; ?> <?php echo $siteConfig['user']['info1']['title']; ?> <?php echo $theme['decoration']; ?></h3>
+        <p><?php echo $siteConfig['user']['info1']['content']; ?></p>
+        <h3 style="color: var(--accent-blue);"><?php echo $theme['decoration']; ?> <?php echo $siteConfig['user']['info2']['title']; ?> <?php echo $theme['decoration']; ?></h3>
+        <p><?php echo $siteConfig['user']['info2']['content']; ?> <a href="<?php echo $siteConfig['user']['info2']['link']['url']; ?>" style="color: var(--text-color);"><?php echo $siteConfig['user']['info2']['link']['text']; ?></a></p>
     </div>
-    <div class="info-container">
-        <div class="data-item" data-value="BG9JUE">
-            <span class="data-label">呼号/Call Sign：</span>
-            <span>BG9JUE</span>
-        </div>
-        
-        <div class="data-item" data-value="Elysia_AI@outlook.com">
-            <span class="data-label">电子邮件/E-Mail：</span>
-            <span>Elysia_AI@outlook.com</span>
-        </div>
+</div>
 
-        <div class="data-item" data-value="OM33as">
-            <span class="data-label">网格定位/GRID：</span>
-            <span>OM33as</span>
-        </div>
-
-        <div class="data-item" data-value="ITU:43 CQ:23">
-            <span class="data-label">分区地址：</span>
-            <span>ITU 43 / CQ 23</span>
-        </div>
-        
-        <div class="data-item" data-value="中华人民共和国 甘肃省 陇南市 徽县 城关镇   742300">
-            <span class="data-label">邮寄地址/Address：</span>
-            <span>甘肃省陇南市徽县城关镇<br>邮政编码：742300</span>
-        </div>
-        <div class="data-item" data-value="3831222674">
-            <span class="data-label">QQ号/QQ ID：</span>
-            <span>3831222674</span>
-        </div>
-        <div style="padding:1rem; color:var(--accent-blue); font-size:0.9em;">
-            以上信息点击即可复制
-        </div>
+<div class="info-container">
+    <div class="data-item" data-value="<?php echo $siteConfig['contact']['call_sign']['value']; ?>">
+        <span class="data-label"><?php echo $siteConfig['contact']['call_sign']['label']; ?></span>
+        <span><?php echo $siteConfig['contact']['call_sign']['value']; ?></span>
     </div>
+    
+    <div class="data-item" data-value="<?php echo $siteConfig['contact']['email']['value']; ?>">
+        <span class="data-label"><?php echo $siteConfig['contact']['email']['label']; ?></span>
+        <span><?php echo $siteConfig['contact']['email']['value']; ?></span>
+    </div>
+
+    <div class="data-item" data-value="<?php echo $siteConfig['contact']['grid']['value']; ?>">
+        <span class="data-label"><?php echo $siteConfig['contact']['grid']['label']; ?></span>
+        <span><?php echo $siteConfig['contact']['grid']['value']; ?></span>
+    </div>
+
+    <div class="data-item" data-value="<?php echo $siteConfig['contact']['zone']['value']; ?>">
+        <span class="data-label"><?php echo $siteConfig['contact']['zone']['label']; ?></span>
+        <span><?php echo $siteConfig['contact']['zone']['value']; ?></span>
+    </div>
+    
+    <div class="data-item" data-value="<?php echo $siteConfig['contact']['address']['value']; ?>">
+        <span class="data-label"><?php echo $siteConfig['contact']['address']['label']; ?></span>
+        <span><?php echo $siteConfig['contact']['address']['display']; ?></span>
+    </div>
+    
+    <div class="data-item" data-value="<?php echo $siteConfig['contact']['qq']['value']; ?>">
+        <span class="data-label"><?php echo $siteConfig['contact']['qq']['label']; ?></span>
+        <span><?php echo $siteConfig['contact']['qq']['value']; ?></span>
+    </div>
+    
+    <div style="padding:1rem; color:var(--accent-blue); font-size:0.9em;">
+        以上信息点击即可复制
+    </div>
+</div>
+
 <div class="info-container poem-container">
     <div class="poem-section">
         <?php foreach ($theme['poem'] as $line): ?>
@@ -735,171 +659,171 @@ $theme = $themes[$currentTheme];
     </div>
     <div class="particle-overlay"></div>
 </div>
-    <div id="clock-container">
-        <div class="clock-item">
-            <div class="clock-label">协调世界时 (UTC)</div>
-            <div id="utc-clock"></div>
-        </div>
-        <div class="clock-item">
-            <div class="clock-label">北京时间 (BJT)</div>
-            <div id="bjt-clock"></div>
-        </div>
-        <div class="clock-item">
-            <div class="clock-label">本地时间 (<span id="timezone-name"></span>)</div>
-            <div id="local-clock"></div>
-        </div>
+
+<div id="clock-container">
+    <div class="clock-item">
+        <div class="clock-label">协调世界时 (UTC)</div>
+        <div id="utc-clock"></div>
     </div>
-</br>
-    <span class="copyright-notice">
-声明: 本站音乐文件及其封面均来自于网络</br>本站的版权标记也概不适用于此</br>您非法使用这些文件导致的法律后果与本站无关</br>如果我的使用侵犯了您的合法权益，请通过邮箱联系</br>确有不当使用会立刻删除
-    </span>
-<p><span class="<?php echo $theme['highlight']; ?>">Copyright © StarlightJUE /「星珏流辉」2025</span></p>
+    <div class="clock-item">
+        <div class="clock-label">北京时间 (BJT)</div>
+        <div id="bjt-clock"></div>
+    </div>
+    <div class="clock-item">
+        <div class="clock-label">本地时间 (<span id="timezone-name"></span>)</div>
+        <div id="local-clock"></div>
+    </div>
+</div>
+<br>
+<span class="copyright-notice">
+    <?php echo $siteConfig['copyright']['notice']; ?>
+</span>
+<p><span class="<?php echo $theme['highlight']; ?>">Copyright © <?php echo $siteConfig['copyright']['owner']; ?> <?php echo $siteConfig['copyright']['year']; ?></span></p>
 
-    <!-- 音频元素 -->
-    <audio id="audioPlayer" autoplay>
-        <source src="<?php echo $musicLibrary[$currentSongIndex]['file']; ?>" type="audio/mpeg">
-    </audio>
+<!-- 音频元素 -->
+<audio id="audioPlayer" autoplay>
+    <source src="<?php echo $musicLibrary[$currentSongIndex]['file']; ?>" type="audio/mpeg">
+</audio>
 
-    <script>
-        // 音乐播放器功能
-        const audioPlayer = document.getElementById('audioPlayer');
-        const musicToggleBtn = document.getElementById('musicToggleBtn');
-        const musicPanel = document.getElementById('musicPanel');
-        const playPauseBtn = document.getElementById('playPauseBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const progressBar = document.getElementById('progressBar');
-        const progressContainer = document.getElementById('progressContainer');
-        const currentTimeDisplay = document.getElementById('currentTime');
-        const durationDisplay = document.getElementById('duration');
-        const musicTitle = document.getElementById('musicTitle');
-        const musicCover = document.getElementById('musicCover');
+<script>
+    // 音乐播放器功能
+    const audioPlayer = document.getElementById('audioPlayer');
+    const musicToggleBtn = document.getElementById('musicToggleBtn');
+    const musicPanel = document.getElementById('musicPanel');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const durationDisplay = document.getElementById('duration');
+    const musicTitle = document.getElementById('musicTitle');
+    const musicCover = document.getElementById('musicCover');
+    
+    // 音乐数据
+    const musicLibrary = <?php echo json_encode($musicLibrary); ?>;
+    let currentSongIndex = <?php echo $currentSongIndex; ?>;
+    let isPlaying = true;
+
+    // 切换音乐面板显示
+    musicToggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        musicPanel.classList.toggle('show');
+    });
+
+    // 点击页面其他地方关闭音乐面板
+    document.addEventListener('click', function() {
+        if (musicPanel.classList.contains('show')) {
+            musicPanel.classList.remove('show');
+        }
+    });
+
+    // 防止音乐面板点击时关闭
+    musicPanel.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // 播放/暂停
+    playPauseBtn.addEventListener('click', function() {
+        togglePlayPause();
+    });
+
+    // 上一首
+    prevBtn.addEventListener('click', function() {
+        prevSong();
+    });
+
+    // 下一首
+    nextBtn.addEventListener('click', function() {
+        nextSong();
+    });
+
+    // 进度条点击
+    progressContainer.addEventListener('click', function(e) {
+        const width = this.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audioPlayer.duration;
+        audioPlayer.currentTime = (clickX / width) * duration;
+    });
+
+    // 更新进度条
+    audioPlayer.addEventListener('timeupdate', updateProgress);
+    audioPlayer.addEventListener('loadedmetadata', function() {
+        durationDisplay.textContent = formatTime(audioPlayer.duration);
+    });
+
+    // 歌曲结束自动下一首
+    audioPlayer.addEventListener('ended', nextSong);
+
+    function togglePlayPause() {
+        if (isPlaying) {
+            audioPlayer.pause();
+            playPauseBtn.textContent = '▶';
+            musicToggleBtn.innerHTML = '<p class="play-icon">▶</p>';
+        } else {
+            audioPlayer.play();
+            playPauseBtn.textContent = '⏸';
+            musicToggleBtn.innerHTML = '';
+        }
+        isPlaying = !isPlaying;
+    }
+
+    function updateProgress() {
+        const { currentTime, duration } = audioPlayer;
+        const progressPercent = (currentTime / duration) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+        currentTimeDisplay.textContent = formatTime(currentTime);
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+
+    function loadSong(index) {
+        const song = musicLibrary[index];
+        audioPlayer.src = song.file;
+        musicTitle.textContent = song.title;
         
-        // 音乐数据
-        const musicLibrary = <?php echo json_encode($musicLibrary); ?>;
-        let currentSongIndex = <?php echo $currentSongIndex; ?>;
-        let isPlaying = true;
-
-        // 切换音乐面板显示
-        musicToggleBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            musicPanel.classList.toggle('show');
-        });
-
-        // 点击页面其他地方关闭音乐面板
-        document.addEventListener('click', function() {
-            if (musicPanel.classList.contains('show')) {
-                musicPanel.classList.remove('show');
-            }
-        });
-
-        // 防止音乐面板点击时关闭
-        musicPanel.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        // 播放/暂停
-        playPauseBtn.addEventListener('click', function() {
-            togglePlayPause();
-        });
-
-        // 上一首
-        prevBtn.addEventListener('click', function() {
-            prevSong();
-        });
-
-        // 下一首
-        nextBtn.addEventListener('click', function() {
-            nextSong();
-        });
-
-        // 进度条点击
-        progressContainer.addEventListener('click', function(e) {
-            const width = this.clientWidth;
-            const clickX = e.offsetX;
-            const duration = audioPlayer.duration;
-            audioPlayer.currentTime = (clickX / width) * duration;
-        });
-
-        // 更新进度条
-        audioPlayer.addEventListener('timeupdate', updateProgress);
-        audioPlayer.addEventListener('loadedmetadata', function() {
-            durationDisplay.textContent = formatTime(audioPlayer.duration);
-        });
-
-        // 歌曲结束自动下一首
-        audioPlayer.addEventListener('ended', nextSong);
-
-        function togglePlayPause() {
-            if (isPlaying) {
-                audioPlayer.pause();
-                playPauseBtn.textContent = '▶';
-                musicToggleBtn.innerHTML = '<p class="play-icon">▶</p>';
-            } else {
-                audioPlayer.play();
-                playPauseBtn.textContent = '⏸';
-                musicToggleBtn.innerHTML = '';
-            }
-            isPlaying = !isPlaying;
+        if (song.cover) {
+            musicCover.style.backgroundImage = `url('${song.cover}')`;
+            musicToggleBtn.style.backgroundImage = `url('${song.cover}')`;
+            musicToggleBtn.innerHTML = '';
+            musicCover.innerHTML = '';
+        } else {
+            musicCover.style.backgroundImage = '';
+            musicToggleBtn.style.backgroundImage = '';
+            musicToggleBtn.innerHTML = '<p class="play-icon">▶</p>';
+            musicCover.innerHTML = '<div class="no-cover">无封面</div>';
         }
-
-        function updateProgress() {
-            const { currentTime, duration } = audioPlayer;
-            const progressPercent = (currentTime / duration) * 100;
-            progressBar.style.width = `${progressPercent}%`;
-            currentTimeDisplay.textContent = formatTime(currentTime);
+        
+        if (isPlaying) {
+            audioPlayer.play();
+            playPauseBtn.textContent = '⏸';
         }
-
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        }
-
-function loadSong(index) {
-    const song = musicLibrary[index];
-    audioPlayer.src = song.file;
-    musicTitle.textContent = song.title;
-    
-    if (song.cover) {
-        musicCover.style.backgroundImage = `url('${song.cover}')`;
-        musicToggleBtn.style.backgroundImage = `url('${song.cover}')`;
-        musicToggleBtn.innerHTML = '';
-        musicCover.innerHTML = '';
-    } else {
-        musicCover.style.backgroundImage = '';
-        musicToggleBtn.style.backgroundImage = '';
-        musicToggleBtn.innerHTML = '<p class="play-icon">▶</p>';
-        musicCover.innerHTML = '<div class="no-cover">无封面</div>';
     }
-    
-    if (isPlaying) {
-        audioPlayer.play();
-        playPauseBtn.textContent = '⏸';
+
+    function prevSong() {
+        currentSongIndex--;
+        if (currentSongIndex < 0) {
+            currentSongIndex = musicLibrary.length - 1;
+        }
+        loadSong(currentSongIndex);
     }
-}
 
-        function prevSong() {
-            currentSongIndex--;
-            if (currentSongIndex < 0) {
-                currentSongIndex = musicLibrary.length - 1;
-            }
-            loadSong(currentSongIndex);
+    function nextSong() {
+        currentSongIndex++;
+        if (currentSongIndex >= musicLibrary.length) {
+            currentSongIndex = 0;
         }
+        loadSong(currentSongIndex);
+    }
 
-        function nextSong() {
-            currentSongIndex++;
-            if (currentSongIndex >= musicLibrary.length) {
-                currentSongIndex = 0;
-            }
-            loadSong(currentSongIndex);
-        }
-
-        // 原有功能
-        // 时钟功能
-        function updateClocks() {
-            const now = new Date();
-            
+    // 时钟功能
+    function updateClocks() {
+        const now = new Date();
+        
             // UTC 时钟
             const utcDate = now.getUTCDate().toString().padStart(2, '0');
             const utcMonth = (now.getUTCMonth() + 1).toString().padStart(2, '0');
