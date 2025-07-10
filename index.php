@@ -754,7 +754,6 @@ $theme = $themes[$currentTheme];
 声明: 本站音乐文件及其封面均来自于网络</br>本站的版权标记也概不适用于此</br>您非法使用这些文件导致的法律后果与本站无关</br>如果我的使用侵犯了您的合法权益，请通过邮箱联系</br>确有不当使用会立刻删除
     </span>
 <p><span class="<?php echo $theme['highlight']; ?>">Copyright © StarlightJUE /「星珏流辉」2025</span></p>
-<a href="https://icp.gov.moe/?keyword=20255209" target="_blank" style="display:inline-flex;align-items:center;gap:4px;text-decoration:none;color:var(--accent-blue);transition:all 0.3s;">萌ICP备20255209号</a></br></br>
 
     <!-- 音频元素 -->
     <audio id="audioPlayer" autoplay>
