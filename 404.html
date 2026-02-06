@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/icon.png" type="image/x-icon">
+    <title>404 --- Not Found</title>
+    <style>
+        :root {
+            --primary-color: #f5f5f5;
+            --accent-color: #e53935;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-color);
+            font-size: 0.7em; /* 全局字体调整为0.7倍 */
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin: 2rem 0 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .main-title {
+            font-size: 1.4rem; /* 2rem × 0.7 */
+            color: var(--accent-color);
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .section-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 0.77rem; /* 1.1rem × 0.7 */
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+        }
+
+        .section-link:hover {
+            color: white;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        #clock-container {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem;
+        }
+
+        .clock-item {
+            font-size: 0.63rem; /* 0.9rem × 0.7 */
+            padding: 0.8rem 1.2rem;
+            background: white;
+            color: var(--text-color);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            min-width: 180px;
+            text-align: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .clock-label {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .audio-section p, .audio-section a {
+            font-size: 1em; /* 保持相对大小 */
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 1.26rem; /* 1.8rem × 0.7 */
+            }
+            .clock-item {
+                min-width: 150px;
+                font-size: 0.56rem; /* 0.8rem × 0.7 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="./avatar.webp" alt="BG9JUE" class="avatar">
+    
+    <div class="header">
+        <h1 class="main-title">迷路了……</h1>
+        <p>404 --- Not Found</p>
+        <div class="section-links">
+            <a href="https://starlight.qpon/" class="section-link">点击回到安全区</a>
+        </div>
+    </div>
+
+    <div id="clock-container">
+        <div class="clock-item" id="utc-clock-container">
+            <div class="clock-label">协调世界时 (UTC)</div>
+            <div id="utc-clock"></div>
+        </div>
+        <div class="clock-item" id="bjt-clock-container">
+            <div class="clock-label">北京时间 (BJT)</div>
+            <div id="bjt-clock"></div>
+        </div>
+        <div class="clock-item" id="local-clock-container">
+            <div class="clock-label">本地时间 (<span id="timezone-name"></span>)</div>
+            <div id="local-clock"></div>
+        </div>
+    </div>
+<p style="color: #333; text-align: center;">本页面代码部分遵循CC 0协议（不包括超链接的导向链接页面）</br><a href="https://icp.gov.moe/?keyword=20255209" target="_blank">萌ICP备20255209号</a></p>
+
+    <script>
+        // 时钟功能
+        function updateClocks() {
+            const now = new Date();
+            
+            // UTC 时钟
+            const utcDate = now.getUTCDate().toString().padStart(2, '0');
+            const utcMonth = (now.getUTCMonth() + 1).toString().padStart(2, '0');
+            const utcYear = now.getUTCFullYear();
+            const utcTime = now.toUTCString().split(' ')[4];
+            document.getElementById('utc-clock').textContent = `${utcYear}/${utcMonth}/${utcDate} ${utcTime}`;
+
+            // BJT 时钟
+            const bjtDate = new Date(now.getTime() + 8 * 3600 * 1000);
+            const bjtDateStr = bjtDate.getUTCDate().toString().padStart(2, '0');
+            const bjtMonthStr = (bjtDate.getUTCMonth() + 1).toString().padStart(2, '0');
+            const bjtYearStr = bjtDate.getUTCFullYear();
+            const bjtHours = bjtDate.getUTCHours().toString().padStart(2, '0');
+            const bjtMinutes = bjtDate.getUTCMinutes().toString().padStart(2, '0');
+            const bjtSeconds = bjtDate.getUTCSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('bjt-clock').textContent = 
+                `${bjtYearStr}/${bjtMonthStr}/${bjtDateStr} ${bjtHours}:${bjtMinutes}:${bjtSeconds}`;
+
+            // 本地时间
+            const timezoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById('timezone-name').textContent = timezoneName;
+            const localDate = now.getDate().toString().padStart(2, '0');
+            const localMonth = (now.getMonth() + 1).toString().padStart(2, '0');
+            const localYear = now.getFullYear();
+            const localHours = now.getHours().toString().padStart(2, '0');
+            const localMinutes = now.getMinutes().toString().padStart(2, '0');
+            const localSeconds = now.getSeconds().toString().padStart(2, '0');
+            
+            document.getElementById('local-clock').textContent = 
+                `${localYear}/${localMonth}/${localDate} ${localHours}:${localMinutes}:${localSeconds}`;
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
+</body>
+</html>
